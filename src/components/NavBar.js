@@ -62,7 +62,7 @@ const NavBar = () => {
                 className="text-2xl font-bold text-gray-800 transition-colors duration-300 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
                 href="/"
               >
-                Task
+                TaskQuery
               </a>
             </div>
 
