@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setAuthToken } from "../../api/auth";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -10,9 +10,9 @@ const googleProvider = new GoogleAuthProvider();
 const Register = () => {
   const { createUser, updateUserProfile, providerLogin } =
     useContext(AuthContext);
-  //const location = useLocation();
-  //const navigate = useNavigate();
-  //const from = location.state?.from?.pathname || "/";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   // Create User with name and profile picture
   const handleSubmit = (event) => {
@@ -47,6 +47,7 @@ const Register = () => {
               .then(() => {
                 form.reset();
                 toast.success("User register successful");
+                navigate(from, { replace: true });
               })
               .catch((err) => {
                 console.log(err);
@@ -66,7 +67,7 @@ const Register = () => {
     providerLogin(googleProvider)
       .then(() => {
         toast.success("User Log in Successfully");
-        //navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
