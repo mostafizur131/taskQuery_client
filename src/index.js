@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import DarkContext from "./context/DarkContext";
+import AuthProvider from "./context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <DarkContext>
-      <App />
-    </DarkContext>
+    <AuthProvider>
+      <DarkContext>
+        <App />
+      </DarkContext>
+    </AuthProvider>
   </React.StrictMode>
 );
 

@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 import ThemeToggle from "./ThemeToggle";
+import { FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { logOut, user } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Log Out Successful");
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
 
   const menuItems = (
     <>
@@ -22,6 +35,38 @@ const NavBar = () => {
           Complete Task
         </Link>
       </li>
+      {user?.uid ? (
+        <>
+          <li>
+            <Link
+              onClick={handleLogOut}
+              className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              Log Out
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link
+              to="/login"
+              className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              Log In
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/register"
+              className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              Register
+            </Link>
+          </li>
+        </>
+      )}
+
       <li>
         <div className="lg:flex items-center mt-4 lg:mt-0">
           <button
@@ -37,15 +82,19 @@ const NavBar = () => {
             aria-label="toggle profile dropdown"
           >
             <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-              <img
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                className="object-cover w-full h-full"
-                alt="avatar"
-              />
+              {user?.uid ? (
+                <img
+                  src={user?.photoURL}
+                  className="object-cover w-full h-full "
+                  alt="avatar"
+                />
+              ) : (
+                <FaUserCircle className="object-cover w-full h-full text-gray-600 dark:text-gray-200" />
+              )}
             </div>
 
             <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">
-              Khatab wedaa
+              {user?.displayName}
             </h3>
           </button>
         </div>
