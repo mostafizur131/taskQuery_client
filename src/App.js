@@ -1,9 +1,11 @@
 import React from "react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Routes/Routes";
 
 const App = () => {
   return (
     <div>
-      <h2>Task management Application</h2>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 };
