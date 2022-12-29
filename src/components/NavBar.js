@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const NavBar = () => {
             className="ml-4 mb-4 lg:mb-0  text-gray-600 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
             aria-label="show notifications"
           >
-            Toggle
+            <ThemeToggle />
           </button>
 
           <button
@@ -66,28 +67,51 @@ const NavBar = () => {
             </div>
 
             {/* Mobile menu button */}
-            <div className="flex lg:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
-                aria-label="toggle menu"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
+            <div className="flex lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? (
+                <button
+                  type="button"
+                  className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+                  aria-label="toggle menu"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 8h16M4 16h16"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    x-show="isOpen"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+                  aria-label="toggle menu"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 8h16M4 16h16"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
 
@@ -99,18 +123,17 @@ const NavBar = () => {
               {menuItems}
             </ul>
           </div>
-          {/* 
-            Mobile tom Menu 
-            */}
+
+          {/*Mobile tom Menu*/}
           <div className="lg:hidden">
             <div
               className={
                 isOpen
-                  ? "absolute top-20 z-20 px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800"
+                  ? "absolute w-full inset-x-0 z-20 px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800"
                   : "hidden"
               }
             >
-              <ul className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+              <ul className="flex flex-col ml-10 lg:ml-0 lg:flex-row lg:items-center lg:mx-8">
                 {menuItems}
               </ul>
             </div>
