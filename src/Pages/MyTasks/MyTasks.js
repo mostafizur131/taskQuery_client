@@ -19,3 +19,14 @@ const MyTasks = () => {
 };
 
 export default MyTasks;
+
+// REACT_APP_API_URL=http://localhost:3001
+
+// REACT_APP_apiKey=AIzaSyDtaaVImdYykXPgBNZpoie5vzY0rdYBNow
+// REACT_APP_authDomain=taskquery.firebaseapp.com
+// REACT_APP_projectId=taskquery
+// REACT_APP_storageBucket=taskquery.appspot.com
+// REACT_APP_messagingSenderId=37095938175
+// REACT_APP_appId=1:37095938175:web:5569ae4d7481fffab1c74a
+
+// REACT_APP_imgBB_key=38b77a8b6a965b19702c861faadbaac8
