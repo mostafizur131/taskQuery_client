@@ -5,7 +5,7 @@ import { router } from "./Routes/Routes";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-700">
       <RouterProvider router={router}></RouterProvider>
       <Toaster />
     </div>
