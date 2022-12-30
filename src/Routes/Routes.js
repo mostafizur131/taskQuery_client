@@ -21,6 +21,8 @@ export const router = createBrowserRouter([
       {
         path: "/myTask",
         element: <MyTasks />,
+        loader: () =>
+          fetch(`https://task-management-server-green.vercel.app/tasks`),
       },
       {
         path: "/login",

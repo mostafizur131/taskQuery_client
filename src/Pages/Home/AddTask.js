@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa";
 
 const AddTask = () => {
   const [details, setDetails] = useState("");
+  const [imgURL, setImgURL] = useState("");
   const AddTasksToDB = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -12,20 +13,33 @@ const AddTask = () => {
     const task = {
       task: name,
       detail: details,
-      imgURL: "",
+      imgURL,
     };
+    // 👇 Create new FormData object and append files
+    const formData = new FormData();
+    formData.append("image", photo);
+    //url
+    const imageKey = process.env.REACT_APP_imgBB_key;
 
-    fetch(`https://task-management-server-green.vercel.app/tasks`, {
+    const url = `https://api.imgbb.com/1/upload?key=${imageKey}`;
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(task),
+      body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        form.reset();
+        setImgURL(data.data.display_url);
+        fetch(`https://task-management-server-green.vercel.app/tasks`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(task),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            form.reset();
+          });
       });
   };
 
