@@ -27,8 +27,7 @@ const Register = () => {
     const formData = new FormData();
     formData.append("image", photo);
     //url
-    //const imageKey = process.env.REACT_APP_imgBB_key;
-    const imageKey = "38b77a8b6a965b19702c861faadbaac8";
+    const imageKey = process.env.REACT_APP_imgBB_key;
     console.log(imageKey);
     const url = `https://api.imgbb.com/1/upload?key=${imageKey}`;
     fetch(url, {

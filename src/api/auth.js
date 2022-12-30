@@ -4,7 +4,7 @@ export const setAuthToken = (user) => {
   };
 
   // Save user in DB and get token
-  fetch(`http://localhost:3001/user/${user?.email}`, {
+  fetch(`https://task-management-server-green.vercel.app/user/${user?.email}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

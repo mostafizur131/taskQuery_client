@@ -15,7 +15,7 @@ const AddTask = () => {
       imgURL: "",
     };
 
-    fetch(`http://localhost:3001/tasks`, {
+    fetch(`https://task-management-server-green.vercel.app/tasks`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
