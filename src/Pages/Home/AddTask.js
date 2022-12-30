@@ -7,10 +7,12 @@ const AddTask = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
+    const photo = form.image.files[0];
 
     const task = {
       task: name,
       detail: details,
+      imgURL: "",
     };
 
     fetch(`http://localhost:3001/tasks`, {
@@ -43,6 +45,14 @@ const AddTask = () => {
                 placeholder="Task Name"
                 aria-label="Task Name"
               />
+            </div>
+            <div className="w-full ">
+              <label
+                htmlFor="dropzone-file"
+                className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 rounded-md dark:bg-gray-800 dark:text-gray-300 border-gray-800 dark:border-gray-600  cursor-pointer"
+              >
+                <input id="dropzone-file" type="file" name="image" />
+              </label>
             </div>
             <div className="w-full mt-4">
               <label className="block mb-2 text-xl font-medium text-gray-600 dark:text-gray-200">
